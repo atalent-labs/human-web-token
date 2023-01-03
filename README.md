@@ -1,20 +1,24 @@
-# inspect-jwt-cli (In progress)
+
+<img src="https://user-images.githubusercontent.com/4768226/210363824-9aeb9ceb-766d-4fed-9f0c-3e491bce3a4a.png" width="100%" />
+
+# hwt-cli (In progress)
+
 
 ## Description
 
-A human friendly JWT inspector for your terminal.
+An opinionated human friendly JWT inspector for your terminal.
 
 ## Background
 
-Why are we constantly using https://jwt.io/ when actually we can craft faster and better user experience.
-It's time to stop sharing data with 3rd party and take the controle back of our JWT. 🔥
+Why are we constantly using https://jwt.io/, but actually I don't know about you but personally I just new a few information.
+But we get overwhelmed by this poor user experience. Adding to this the data privacy...
+I decided that it was time to stop sharing data with 3rd party and take the controle back of my JWT. 🔥
 
 ## Installation
 
 ```sh
 curl https://simple-jwt.atalent-labs./install.sh | bash
 ```
-
 
 ## Usage
 
