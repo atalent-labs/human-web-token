@@ -1,0 +1,11 @@
+Scenario: Throw an error if the content on the clipboard is not a token
+Given:
+  token:
+    type: 'plain'
+    data: 'test'
+  options:
+    format: raw
+Then:
+  success: false
+  output: |
+    The input is not a valid standard JWT

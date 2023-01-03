@@ -1,0 +1,40 @@
+Scenario: Return the successfull payload with the human format
+Given:
+  mock:
+    dateTime: 2022-10-06T13:57:32+07:00
+  token:
+    type: decoded
+    data:
+      header:
+        alg: 'RS256'
+      payload:
+        exp: 1665039752
+        iat: 1665039152
+        jti: b9a5fb2b-370d-4492-aab7-bf5ade322bb6
+        iss: "https://example.com"
+        sub: "2f78666a-ef79-4014-9ae9-66ad7813be4b"
+        typ: "Bearer"
+        azp: "64a891e9-1bf2-46ee-9771-059e61ecc449"
+        session_state: "874fe383-966e-4e94-9717-9748bd1ccc81"
+        scope: "read:leads email"
+        sid: "874fe383-966e-4e94-9717-9748bd1ccc81"
+      secret: 'secret'
+Then:
+  success: true
+  output: |
+    {
+      "token_id": "b9a5fb2b-370d-4492-aab7-bf5ade322bb6",
+      "type": "Bearer",
+      "expirate_at": "2022-10-06 14:02:32 GMT +0700 (5 minutes left)",
+      "issue_at": "2022-10-06 13:52:32 GMT +0700 (5 minutes ago)",
+      "issue_by": "https://example.com",
+      "user_id": "2f78666a-ef79-4014-9ae9-66ad7813be4b",
+      "client_id": "64a891e9-1bf2-46ee-9771-059e61ecc449",
+      "permissions": [
+        "read:leads",
+        "email"
+      ],
+      "session_id": "874fe383-966e-4e94-9717-9748bd1ccc81",
+      "session_state": "874fe383-966e-4e94-9717-9748bd1ccc81",
+      "validity": "10 minutes"
+    }

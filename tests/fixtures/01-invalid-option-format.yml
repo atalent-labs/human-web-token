@@ -1,0 +1,11 @@
+Scenario: Throw an error if the format options is invalid
+Given:
+  token:
+    type: 'plain'
+    data: 'test'
+  options:
+    format: markdown
+Then:
+  success: false
+  output: |
+    The format "markdown" is not valid.
