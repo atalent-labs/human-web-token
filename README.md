@@ -40,7 +40,7 @@ Then from there you will receice the following response:
 ### Options
 
 
-### `--raw`
+### `--raw` or 
 
 ```
 hwt --raw
@@ -50,14 +50,54 @@ Result:
 
 ![image](https://user-images.githubusercontent.com/4768226/211049954-be214154-9f2e-4dcc-aefd-53185d4e0dde.png)
   
-### `--claim` to filter
+### `--claim` or `-c` to filter
 
 If you need to isolate a specific claim you can use the option `--claim`
 
+<img width="1136" alt="image" src="https://user-images.githubusercontent.com/4768226/211145938-e521250f-0024-4586-8994-26a55ab31cab.png">
+
+
+### Troubleshooting
+
+If you are running into some issues you can use the environment variable `DEBUG`.
+
+Example: 
 ```
-jwt --table
+DEBUG=hwt hwt
 ```
 
+
+## Contribution Development
+
+Surprisingly, this CLI is made with nodejs ^^. We are open to a remake in GO ... Especially knowing since we are using [pkg](https://github.com/vercel/pkg) the file is about 50M 😬.
+
+In order to run the code locally you can
+* Install the dependencies: `npm i`
+* Run the test `npm test`
+
+### Testing
+
+In order to increase the understaing the Unit test has been made through a small framework from scratch leveraging yaml.
+
+Each test are isolated by folder in `tests/fixtures`
+
+Run the tests
+
 ```
-| | |
+npm test
 ```
+
+Run the tests (Watch mode)
+
+```
+npm run test:watch
+```
+
+## Author
+
+- [@olivierodo](https://www.github.com/olivierodo) - 🇫🇷
+
+## License
+
+[MIT License](./LICENSE)
+
