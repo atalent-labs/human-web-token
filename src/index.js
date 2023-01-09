@@ -1,24 +1,39 @@
-import HumanFormat from './format/human.js'
-import RawFormat from './format/raw.js'
-import JsonFormat from './format/json.js'
+import Transform from './transform.js'
 
-const FORMAT = {
-  'raw': RawFormat,
-  'json': JsonFormat,
-  'human': HumanFormat
-}
-
-export default function JWT (input, options) {
-  const {
-    format = "human"
-  } = options
-
-  const Class = FORMAT[format]
-  if (undefined == Class) {
-    throw new Error(`The format "${format}" is not valid.`)
+const FORMATS = {
+  'human': original => {
+      const item = JSON.parse(JSON.stringify(original))
+      if (!item.title) {
+        item.title = '❓ custom claim'
+      }
+      delete item.order
+      delete item.raw
+      delete item.emoji
+      if (Array.isArray(item.value)) {
+        item.value = item.value.length + ' items'
+      }
+      return item
+  },
+  'raw': original => {
+    const item = JSON.parse(JSON.stringify(original))
+    delete item.order
+    delete item.emoji
+    delete item.title
+    delete item.value
+    return item
   }
-  
+}
+export default function JWT (input, options = {}) {
   try {
+    const {
+      format = "human",
+      claims
+    } = options
+
+    if (undefined === FORMATS[format]) {
+      throw new Error(`The format "${format}" is not valid.`)
+    }
+    
     let [
       header,
       payload,
@@ -27,10 +42,21 @@ export default function JWT (input, options) {
 
     header = JSON.parse(Buffer.from(header, 'base64').toString('utf-8'))
     payload = JSON.parse(Buffer.from(payload, 'base64').toString('utf-8'))
-    const result = new Class(payload)
-    return result.toString()
+
+    const transformer = new Transform(payload, format)
+
+    const result = transformer.get()
+    result.data = result.data.map(FORMATS[format])
+    if (claims) {
+      result.data = result.data.filter(({ claim }) => {
+        return claims.includes(claim)
+      })
+    }
+    return result
   } catch (e) {
-    console.log(e)
-    throw new Error('The input is not a valid standard JWT')
+    if (e instanceof SyntaxError) {
+      throw new SyntaxError('The input is not a valid standard JWT')
+    }
+    throw e
   }
 }

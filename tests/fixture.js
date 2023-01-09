@@ -37,11 +37,11 @@ export class Fixture {
   }
 
   get output () {
-    return this.#then.output.trim()
+    return this.#then.output
   }
 
   get options () {
-    return this.#given.options || {}
+    return Object.assign(this.#given.options || {})
   }
 
   get mock () {
@@ -76,4 +76,3 @@ export class Fixture {
     return  `${this.id} - ${this.scenario}`
   }
 }
-

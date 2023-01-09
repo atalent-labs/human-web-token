@@ -1,14 +1,16 @@
 {
   "name": "simple-jwt",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "A human friendly JWT inspector for your terminal. ",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild index.js  --inject:./import-meta-url.js --define:import.meta.url=import_meta_url --sourcemap  --bundle --platform=node --outfile=dist/jwt.cjs && pkg --out-path dist --compress GZip dist/jwt.cjs ",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js tests/",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch  tests/",
-    "test:debug": "DEBUG=* node --experimental-vm-modules node_modules/jest/bin/jest.js --watch  tests/"
+    "prebuild": "esbuild index.js  --inject:./scripts/import-meta-url.build.js --define:import.meta.url=import_meta_url --sourcemap  --bundle --platform=node --outfile=dist/hwt.cjs",
+    "build": "pkg --out-path dist --compress GZip dist/hwt.cjs ",
+    "postbuild": "tar -cvzf dist/hwt.tar.gz dist/hwt-*",
+    "test": "TZ=UTC node --experimental-vm-modules node_modules/jest/bin/jest.js tests/",
+    "test:watch": "TZ=UTC node --experimental-vm-modules node_modules/jest/bin/jest.js --watch  tests/",
+    "test:debug": "DEBUG=* TZ=UTC node --experimental-vm-modules node_modules/jest/bin/jest.js --watch  tests/"
   },
   "keywords": [],
   "author": "Olivier Rodomond",
@@ -16,6 +18,9 @@
   "dependencies": {
     "chalk": "^5.2.0",
     "clipboardy": "^3.0.0",
+    "commander": "^9.4.1",
+    "console-table-printer": "^2.11.1",
+    "debug": "^4.3.4",
     "moment": "^2.29.4"
   },
   "devDependencies": {
@@ -24,5 +29,10 @@
     "jwt-simple": "^0.5.6",
     "pkg": "^5.8.0",
     "yaml": "^2.2.1"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "#(.*)": "<rootDir>/node_modules/$1"
+    }
   }
 }

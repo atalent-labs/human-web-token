@@ -20,8 +20,8 @@ function loadFixtures(folder, only) {
 }
 
 const selectedFixture = [
-  //'02'
 ]
+
 
 const fixtureList = loadFixtures(FIXTURE_FOLDER, selectedFixture)
 test.each(fixtureList)('Tests - %s', async (fixture) => {
@@ -31,9 +31,13 @@ test.each(fixtureList)('Tests - %s', async (fixture) => {
   }
 
   if (fixture.ok) {
-    expect(fixture.run()).toEqual(fixture.output)
+    const result = fixture.run()
+    expect(result).toEqual(fixture.output)
   } else {
-    expect(() => fixture.run()).toThrow(fixture.output)
+    expect(() => fixture.run()).toThrow(fixture.output.trim())
   }
 })
 
+afterEach(() => {
+      jest.restoreAllMocks();
+}); 
