@@ -17,7 +17,7 @@ I decided that it was time to stop sharing data with 3rd party and take the cont
 ## Installation
 
 ```sh
-curl https://simple-jwt.atalent-labs./install.sh | bash
+curl https://atalent-consulting.com/hwt/install.sh | bash 
 ```
 
 ## Usage
