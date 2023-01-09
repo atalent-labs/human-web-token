@@ -1,6 +1,6 @@
 {
   "name": "hwt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A human friendly JWT inspector for your terminal.",
   "type": "module",
   "main": "index.js",
