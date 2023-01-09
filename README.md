@@ -9,16 +9,18 @@
 An opinionated human friendly JWT inspector for your terminal.
 
 
-
-https://user-images.githubusercontent.com/4768226/211298382-039b09d4-b5cb-4b77-8dce-82f73a9ba714.mp4
-
-
-
 ## Background
 
 Why are we constantly using https://jwt.io/, but actually I don't know about you but personally I just new a few information.
 But we get overwhelmed by this poor user experience. Adding to this the data privacy...
 I decided that it was time to stop sharing data with 3rd party and take the controle back of my JWT. 🔥
+
+
+## Demo
+
+https://user-images.githubusercontent.com/4768226/211298382-039b09d4-b5cb-4b77-8dce-82f73a9ba714.mp4
+
+
 
 ## Installation
 
