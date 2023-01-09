@@ -38,7 +38,7 @@ export function Render ({ data, metadata }) {
   }
 
   return `
-> Reading the JWT from the your clipboard
+> Reading the JWT from your clipboard
 --
 > The JWT is ${status}
 
