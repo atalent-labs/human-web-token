@@ -4,11 +4,13 @@ import chalk from 'chalk';
 import Debug from 'debug';
 import JWT from './src/index.js';
 import { Render } from './src/table.js';
+import pkg from './package.json' assert { type: 'json' }
 
 global.debug = Debug('hwt')
 
 try {
   program
+    .version(pkg.version, '-v, --version', 'output the current version')
     .option('--raw')
     .option('-c, --claims <claims>')
     .hook('preAction', (command, actionCommand) => {
