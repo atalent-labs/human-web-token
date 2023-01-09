@@ -1,12 +1,18 @@
 
 <img src="https://user-images.githubusercontent.com/4768226/210363824-9aeb9ceb-766d-4fed-9f0c-3e491bce3a4a.png" width="100%" />
 
-# hwt-cli (In progress)
+# hwt (command line tool)
 
 
 ## Description
 
 An opinionated human friendly JWT inspector for your terminal.
+
+
+
+https://user-images.githubusercontent.com/4768226/211298382-039b09d4-b5cb-4b77-8dce-82f73a9ba714.mp4
+
+
 
 ## Background
 
