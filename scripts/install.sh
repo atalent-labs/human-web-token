@@ -9,7 +9,7 @@ if [ -z ${HOME+x} ]; then
 fi
 
 if [ "$(uname)" == "Darwin" ]; then
-  OS=darwin
+  OS=macos
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   OS=linux
 else
@@ -23,8 +23,34 @@ if [ "$ARCH" == "x86_64" ]; then
 fi
 
 mkdir -p $HOME/.local/bin
-mkdir -p $HOME/.local/lib
-cd $HOME/.local/lib
+cd $HOME/.local/bin
 
-# @TODO
 
+VER=$(curl --silent -qI https://github.com/atalent-labs/human-web-token/releases/latest | awk -F '/' '/^location/ {print  substr($NF, 1, length($NF)-1)}');
+URL="https://github.com/atalent-labs/human-web-token/releases/download/$VER/hwt.tar.gz"
+TAR_ARGS="xz"
+
+echo "Installing CLI from $URL"
+if [ $(command -v curl) ]; then
+  curl -L --silent  "$URL" | tar "$TAR_ARGS"
+else
+  wget -O- "$URL" | tar "$TAR_ARGS"
+fi
+
+
+# delete old hwt bin if exists
+rm -f $(command -v hwt) || true
+rm -f $HOME/.local/bin/hwt
+
+cp ./dist/hwt-$OS hwt
+
+rm -rf ./dist
+
+if [[ ! ":$PATH:" == *":$HOME/.local/bin:"* ]]; then
+  echoerr "HWT has been installed but your path is missing $HOME/.local/bin, you need to add this to use HWT CLI."
+else
+  # test the CLI
+  LOCATION=$(command -v hwt)
+  echo "hwt installed to $LOCATION"
+  hwt -v
+fi
